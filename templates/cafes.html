@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}Restaurants{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+
+      <h1>{{ heading }}</h1>
+        <table class="table table-dark" style="color:white">
+            <thead>
+                <tr>
+                  <th scope="col">id</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Map Url</th>
+                  <th scope="col">Image Url</th>
+                  <th scope="col">Location</th>
+                  <th scope="col">Has Sockets</th>
+                  <th scope="col">Has Toilet</th>
+                  <th scope="col">Has Wi-Fi</th>
+                  <th scope="col">Can Take Calls</th>
+                  <th scope="col">Seats</th>
+                  <th scope="col">Coffee Price</th>
+                  <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cafe in cafes %}
+                    <tr>
+                      <th scope="row">{{ cafe.id }}</th>
+                      <td>{{ cafe.name }}</td>
+                      <td><a href="{{ cafe.map_url }}">Map Link</a></td>
+                      <td><a href="{{ cafe.img_url }}">Image Link</a></td>
+                      <td>{{ cafe.location }}</td>
+                      <td>{{ cafe.has_sockets }}</td>
+                      <td>{{ cafe.has_toilet }}</td>
+                      <td>{{ cafe.has_wifi }}</td>
+                      <td>{{ cafe.can_take_calls }}</td>
+                      <td>{{ cafe.seats }}</td>
+                      <td><a href="{{ url_for('update_price', cafe_id=cafe.id) }}">{{ cafe.coffee_price }}</a></td>
+                      <td>
+                        <a class="btn btn-warning btn-sm" href="{{ url_for('delete_cafe', cafe_id=cafe.id) }}" role="button">Delete</a>
+                      </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+      <p><a href="{{ url_for('home') }}">Return to index page</a></p>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

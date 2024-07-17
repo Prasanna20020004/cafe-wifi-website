@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Update Price{% endblock %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8">
+
+      <h1>Update Cafe Price</h1>
+      {{ render_form(form) }}
+
+    </div>
+  </div>
+</div>
+{% endblock %}
