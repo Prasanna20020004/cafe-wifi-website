@@ -1,6 +1,6 @@
 import os
 import random
-from flask import Flask, jsonify, render_template, request, redirect, url_for
+from flask import Flask, jsonify, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String, Boolean
@@ -136,7 +136,8 @@ def delete_cafe(cafe_id):
         cafe_to_delete = db.session.execute(db.select(Cafe).where(Cafe.id == cafe_id)).scalar()
 
         if api_key != "TopSecretAPIKey":
-            return redirect(url_for("get_all_cafe"))
+            flash("Invalid API Key. Access Denied!", "error")
+            return redirect(url_for("delete_cafe", cafe_id=cafe_id))
 
         if delete_form.validate_on_submit():
             db.session.delete(cafe_to_delete)
